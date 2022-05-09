@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import './App.css';
 
@@ -11,7 +10,7 @@ function App() {
       .then(data => setUsers(data))
   }, []);
 
-  const handleToSubmit = event => {
+  const handleAddUsers = event => {
     event.preventDefault();
     const name = event.target.name.value;
     const email = event.target.email.value;
@@ -19,7 +18,7 @@ function App() {
     console.log(name, email)
 
 
-    fetch('http://localhost:5000/users', {
+    fetch('http://localhost:5000/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,7 +27,9 @@ function App() {
     })
       .then(res => res.json())
       .then(data => {
-        console.log('Success:', data);
+        const newUsers = [...users, data];
+        setUsers(newUsers);
+        console.log(data);
       })
   }
 
@@ -37,7 +38,7 @@ function App() {
     <div className="App">
       <h1>My First react with node</h1>
       <p>Users: {users.length}</p>
-      <form onSubmit={handleToSubmit}>
+      <form onSubmit={handleAddUsers}>
         <input type="text" name="name" placeholder='Name' required />
         <input type="text" name="email" placeholder='Email' required />
         <input type="submit" value="Add User" />

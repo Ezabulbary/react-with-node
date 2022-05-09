@@ -45,7 +45,7 @@ function App() {
       </form>
       <ul>
         {
-          users.map(user => <li key={user.id}>Id: {user.id}, Name: {user.name} Job:{user.job}</li>)
+          users.map(user => <li key={user.id}>Id: {user.id}, Name: {user.name}, email:{user.email}</li>)
         }
       </ul>
     </div>
